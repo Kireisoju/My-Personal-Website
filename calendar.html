@@ -46,63 +46,94 @@
         </div>
     </nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2 bg-white border-end">
-                <div class="p-3">
-                    <button type="button" class="btn btn-primary w-100 shadow-sm" data-bs-toggle="modal" data-bs-target="#event_modal">
-                        <i class="bi bi-plus-lg"></i> Create Event
-                    </button>
-                </div>
+     <div class="row">
+        <div class="col-2">
+            <div class="custom-container">
+                <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#event_modal"> Create Event</button>
             </div>
-
-            <div class="col-md-10 py-4">
-                <div id="calendar" class="row g-2 px-3">
-                    <div class="col-sm day-column bg-white rounded shadow-sm" id="sunday">
-                        <div class="day-header text-center py-2">Sunday</div>
+        </div>
+        <div class="col">
+            <div class="container-md container-fluid py-4 h-100">
+                <div id="calendar" class="row h-100">
+                    <div class="col-sm m-1 bg-white rounded px-1 px-md-2" id="sunday">
+                        <div class="h6 text-center position-relative py-2 day">
+                            Sunday
+                        </div>
                     </div>
-                    <div class="col-sm day-column bg-white rounded shadow-sm" id="monday">
-                        <div class="day-header text-center py-2">Monday</div>
+                    <div class="col-sm m-1 bg-white rounded px-1 px-md-2" id="monday">
+                        <div class="h6 text-center position-relative py-2 day">
+                            Monday
+                        </div>
                     </div>
-                    <div class="col-sm day-column bg-white rounded shadow-sm" id="tuesday">
-                        <div class="day-header text-center py-2">Tuesday</div>
+                    <div class="col-sm m-1 bg-white rounded px-1 px-md-2" id="tuesday">
+                        <div class="h6 text-center position-relative py-2 day">
+                            Tuesday
+                        </div>
                     </div>
-                    <div class="col-sm day-column bg-white rounded shadow-sm" id="wednesday">
-                        <div class="day-header text-center py-2">Wednesday</div>
+                    <div class="col-sm m-1 bg-white rounded px-1 px-md-2" id="wednesday">
+                        <div class="h6 text-center position-relative py-2 day">
+                            Wednesday
+                        </div>
                     </div>
-                    <div class="col-sm day-column bg-white rounded shadow-sm" id="thursday">
-                        <div class="day-header text-center py-2">Thursday</div>
+                    <div class="col-sm m-1 bg-white rounded px-1 px-md-2" id="thursday">
+                        <div class="h6 text-center position-relative py-2 day">
+                            Thursday
+                        </div>
                     </div>
-                    <div class="col-sm day-column bg-white rounded shadow-sm" id="friday">
-                        <div class="day-header text-center py-2">Friday</div>
+                    <div class="col-sm m-1 bg-white rounded px-1 px-md-2" id="friday">
+                        <div class="h6 text-center position-relative py-2 day">
+                            Friday
+                        </div>
                     </div>
-                    <div class="col-sm day-column bg-white rounded shadow-sm" id="saturday">
-                        <div class="day-header text-center py-2">Saturday</div>
+                    <div class="col-sm m-1 bg-white rounded px-1 px-md-2" id="saturday">
+                        <div class="h6 text-center position-relative py-2 day">
+                            Saturday
+                        </div>
                     </div>
-                </div>
+                </div>        
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="event_modal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
+
+
+
+
+
+ <div class="modal fade" id="event_modal" tabindex="-1" aria-labelledby="eventModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="eventModalLabel">Add New Event</h5>
+                    <h5 class="modal-title" id="eventModalLabel">Add Event</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="event_form" class="needs-validation" novalidate>
-                        <div class="mb-3">
-                            <label class="form-label"><strong>Event Name</strong></label>
-                            <input type="text" id="event_name" class="form-control" placeholder="Project Meeting" required>
-                            <div class="invalid-feedback">Please enter a name for the event.</div>
-                        </div>
+                    <div class="modal-body">
 
-                        <div class="mb-3">
-                            <label class="form-label"><strong>Weekday</strong></label>
-                            <select id="event_weekday" class="form-select" required>
-                                <option value="" selected disabled>Select Day</option>
+                              <div class="modal-body">
+
+                            <form id="event_form" onsubmit="saveEvent(event)">
+
+                            <!-- Event Name -->
+                            <div class="mb-3">
+                                <label><strong>Event Name</strong></label>
+                                <input
+                                type="text"
+                                id="event_name"
+                                class="form-control"
+                                required
+                                >
+                            </div>
+
+                            <!-- Weekday -->
+                            <div class="mb-3">
+                                <label><strong>Weekday</strong></label>
+                                <select
+                                id="event_weekday"
+                                class="form-control"
+                                required
+                                >
+                                <option value="">Select Day</option>
                                 <option value="sunday">Sunday</option>
                                 <option value="monday">Monday</option>
                                 <option value="tuesday">Tuesday</option>
@@ -110,61 +141,93 @@
                                 <option value="thursday">Thursday</option>
                                 <option value="friday">Friday</option>
                                 <option value="saturday">Saturday</option>
-                            </select>
-                            <div class="invalid-feedback">Please select a day of the week.</div>
-                        </div>
+                                </select>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label"><strong>Time</strong></label>
-                            <input type="time" id="event_time" class="form-control" required>
-                            <div class="invalid-feedback">Please select a time.</div>
-                        </div>
+                            <!-- Time -->
+                            <div class="mb-3">
+                                <label><strong>Time</strong></label>
+                                <input
+                                type="time"
+                                id="event_time"
+                                class="form-control"
+                                required
+                                >
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label"><strong>Category</strong></label>
-                            <select id="event_category" class="form-select" required>
+
+                            <!-- Category -->
+                            <div class="mb-3">
+                                <label><strong>Category</strong></label>
+                                <select id="event_category" class="form-control" required>
                                 <option value="academic">Academic</option>
                                 <option value="work">Work</option>
                                 <option value="personal">Personal</option>
                                 <option value="other">Other</option>
-                            </select>
-                        </div>
+                                </select>
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label"><strong>Event Modality</strong></label>
-                            <select id="event_modality" class="form-select" onchange="updateLocationOptions(this.value)" required>
+                            <!-- Modality -->
+                            <div class="mb-3">
+                                <label><strong>Event Modality</strong></label>
+                                <select
+                                id="event_modality"
+                                class="form-control"
+                                onchange="updateLocationOptions(this.value)"
+                                required
+                                >
                                 <option value="in-person">In Person</option>
                                 <option value="remote">Remote</option>
-                            </select>
-                        </div>
+                                </select>
+                            </div>
 
-                        <div class="mb-3" id="location_div">
-                            <label class="form-label"><strong>Location</strong></label>
-                            <input type="text" id="event_location" class="form-control" required placeholder="Room 101">
-                            <div class="invalid-feedback">Please provide a location.</div>
-                        </div>
+                            <!-- Location -->
+                            <div class="mb-3" id="location_div">
+                                <label><strong>Event Location</strong></label>
+                                <input
+                                type="text"
+                                id="event_location"
+                                class="form-control"
+                                required
+                                >
+                            </div>
 
-                        <div class="mb-3 d-none" id="remote_div">
-                            <label class="form-label"><strong>Remote URL</strong></label>
-                            <input type="url" id="event_remote_url" class="form-control" placeholder="https://zoom.us/..." pattern="https?://.+">
-                            <div class="invalid-feedback">Please enter a valid URL.</div>
-                        </div>
+                            <!-- Remote URL -->
+                            <div class="mb-3" id="remote_div" style="display:none;">
+                                <label><strong>Remote URL</strong></label>
+                                <input type="text"
+                                id="event_remote_url"
+                                class="form-control"
+                                placeholder="https://"
+                                pattern="https?://.+"
+                                required
+                                >
+                            </div>
 
-                        <div class="mb-3">
-                            <label class="form-label"><strong>Attendees</strong></label>
-                            <input type="text" id="event_attendees" class="form-control" placeholder="Alice, Bob" required>
-                            <div class="invalid-feedback">Please list at least one attendee.</div>
-                        </div>
+                            <!-- Attendees -->
+                            <div class="mb-3">
+                                <label><strong>Attendees</strong></label>
+                                <input
+                                type="text"
+                                id="event_attendees"
+                                class="form-control"
+                                placeholder="Alice, Bob"
+                                required
+                                >
+                            </div>
 
-                        <div class="modal-footer px-0 pb-0">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button class="btn btn-primary" type="button" onclick="saveEvent(event)">Create Event</button>
-                        </div>
-                    </form>
+                            <button class="btn btn-primary w-100" type="submit">
+                                Create Event 
+                            </button>
+
+                            </form>
+                    </div>
                 </div>
+
+
+
             </div>
-        </div>
-    </div>
+
 
     <footer class="bg-dark text-white pt-4 pb-2 mt-auto">
         <div class="container text-center">
@@ -184,3 +247,4 @@
     <script src="resources/js/script.js"></script>
 </body>
 </html>
+<!--finished-->

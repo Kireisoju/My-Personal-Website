@@ -4,7 +4,7 @@ let editingEventIndex = null; // Tracks which event is being edited
 
 
 //   Toggle Location vs Remote URL
-
+/*
 function updateLocationOptions() {
     let modality = document.getElementById("event_modality").value;
     let locationDiv = document.getElementById("location_div");
@@ -18,6 +18,44 @@ function updateLocationOptions() {
         remoteDiv.style.display = "block";
     }
 }
+
+*/
+
+function updateLocationOptions() {
+    let modality = document.getElementById("event_modality").value;
+
+    let locationDiv = document.getElementById("location_div");
+    let remoteDiv = document.getElementById("remote_div");
+
+    let locationInput = document.getElementById("event_location");
+    let remoteInput = document.getElementById("event_remote_url");
+
+    if (modality === "in-person") {
+
+        locationDiv.style.display = "block";
+        remoteDiv.style.display = "none";
+
+        locationInput.required = true;
+        locationInput.disabled = false;
+
+        remoteInput.required = false;
+        remoteInput.disabled = true;  
+        remoteInput.value = "";        
+
+    } else {
+
+        locationDiv.style.display = "none";
+        remoteDiv.style.display = "block";
+
+        remoteInput.required = true;
+        remoteInput.disabled = false;
+
+        locationInput.required = false;
+        locationInput.disabled = true; 
+        locationInput.value = "";      
+    }
+}
+
 
 
 //   Save Event (Create or Update)
@@ -58,13 +96,24 @@ function saveEvent(event) {
         addEventToCalendarUI(eventDetails, events.length - 1);
     }
 
-    // Reset form
-    document.getElementById("event_form").reset();
+// Reset form
+document.getElementById("event_form").reset();
 
-    // Close modal
-    const myModalElement = document.getElementById("event_modal");
-    const myModal = bootstrap.Modal.getOrCreateInstance(myModalElement);
-    myModal.hide();
+// Force default modality
+document.getElementById("event_modality").value = "in-person";
+
+// Reapply modality rules
+updateLocationOptions();
+
+// Exit edit mode
+editingEventIndex = null;
+
+// Close modal
+const myModalElement = document.getElementById("event_modal");
+const myModal = bootstrap.Modal.getOrCreateInstance(myModalElement);
+myModal.hide();
+
+
 }
 
 
@@ -105,8 +154,8 @@ function createEventCard(eventDetails, index) {
         <strong>Event Name:</strong> ${eventDetails.name}<br>
         <strong>Time:</strong> ${eventDetails.time}<br>
         <strong>Modality:</strong> ${eventDetails.modality}<br>
-        ${eventDetails.location ? "<strong>Event Location: </strong>" + eventDetails.location + "<br>" : ""}
-        ${eventDetails.remote_url ? "<strong>URL: </strong>" + eventDetails.remote_url + "<br>" : ""}
+        ${eventDetails.location ? "<strong>Event Location:</strong> " + eventDetails.location + "<br>" : ""}
+        ${eventDetails.remote_url ? "<strong>URL:</strong> " + eventDetails.remote_url + "<br>" : ""}
         <strong>Attendees:</strong> ${eventDetails.attendees}
     `;
     event_element.appendChild(info);
@@ -160,3 +209,6 @@ function refreshCalendarUI() {
         addEventToCalendarUI(evt, idx);
     });
 }
+
+updateLocationOptions();
+
